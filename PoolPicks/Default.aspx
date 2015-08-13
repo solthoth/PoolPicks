@@ -11,9 +11,4 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a[href$="/"]').parent().addClass('active');
-        });
-    </script>
 </asp:Content>

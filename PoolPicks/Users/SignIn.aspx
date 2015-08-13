@@ -43,7 +43,7 @@
                 border-top-right-radius: 0;
             }
     </style>
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form class="form-signin">
@@ -62,9 +62,4 @@
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a[href$="/Users/SignIn.aspx"]').parent().addClass('active');
-        });
-    </script>
 </asp:Content>
