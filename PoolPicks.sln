@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoolPicks", "PoolPicks\PoolPicks.csproj", "{1B2C26A5-2740-4B52-BC63-057B73BBD38D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoolPicks.Tests", "PoolPicks.Tests\PoolPicks.Tests.csproj", "{26892532-BCE5-4A41-86C6-08B9CD1397C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B2C26A5-2740-4B52-BC63-057B73BBD38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B2C26A5-2740-4B52-BC63-057B73BBD38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B2C26A5-2740-4B52-BC63-057B73BBD38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B2C26A5-2740-4B52-BC63-057B73BBD38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26892532-BCE5-4A41-86C6-08B9CD1397C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26892532-BCE5-4A41-86C6-08B9CD1397C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26892532-BCE5-4A41-86C6-08B9CD1397C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26892532-BCE5-4A41-86C6-08B9CD1397C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
