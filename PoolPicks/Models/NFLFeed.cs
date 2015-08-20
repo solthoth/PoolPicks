@@ -69,6 +69,5 @@ namespace PoolPicks.Models
             xmlFeed.Load(NFLSS_XML);
             ParseXML(xmlFeed);
         }
-
     }
 }
