@@ -4,11 +4,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 class="cover-heading">Game Schedules</h1>
+    <div id="loadingSchedule" class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            Loading...
+        </div>
+    </div>
     <div ng-app="ScheduleApp" ng-controller="ScheduleCtrl">
         <table class="table">
-            <tr ng-repeat="g in games track by $index">
-                <td>{{ g.HomeTeam.Name + ' ' + g.HomeScore }}</td>
-                <td>{{ g.AwayTeam.Name + ' ' + g.AwayScore }}</td>
+            <tr ng-repeat="g in games">
+                <td><img src="http://i.nflcdn.com/static/site/7.1/img/logos/svg/teams-matte-mascot/{{g.HomeTeam.Name}}.svg" />{{ g.HomeScore }}</td>
+                <td><img src="http://i.nflcdn.com/static/site/7.1/img/logos/svg/teams-matte-mascot/{{g.AwayTeam.Name}}.svg" />{{ g.AwayScore }}</td>
             </tr>
         </table>
     </div>
@@ -22,19 +27,40 @@
         <asp:ScriptManager runat="server" EnablePageMethods="true" />
     </form>
     <script type="text/javascript">
+        $()
         var app = angular.module('ScheduleApp', []);
         app.controller('ScheduleCtrl', function ($scope, $http) {
-            $.ajax({
+            /* Notes on code below:
+                Based on observation, it would seem that using $.ajax won't function
+                properly with angular for some reason, using the $http object does
+                seem to work just fine.
+            */
+            $http.post("Default.aspx/ThisWeekSchedule",{}).then(function (response) {
+                //On Success
+                var nflJson = JSON.parse(response.data.d);
+                $scope.games = nflJson.Games;
+                console.log(nflJson.Games);
+                $("#loadingSchedule").hide();
+            },
+            function (response) {
+                //On Error
+                console.log("Failed: "+response);
+            });
+            /*$.ajax({
                 type: "POST",
                 url: "Default.aspx/ThisWeekSchedule",
-                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
-                    $scope.games = response.games;
-                    console.log(response.games);
+                success: function (data) {
+                    var response = JSON.parse(data.d);
+                    $scope.games = response.Games;
+                    console.log(response.Games);
+                    $("#loadingSchedule").hide();
+                },
+                error: function (response) {
+                    console.log("Failed: "+response);
                 }
-            });
+            });*/
         });
     </script>
 </asp:Content>
