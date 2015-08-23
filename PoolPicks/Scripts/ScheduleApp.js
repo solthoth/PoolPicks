@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ScheduleApp', []);
 app.controller('ScheduleCtrl', function ($scope, $http) {
-    $scope.progbarHide = false;
+    $scope.hideContent = false;
     /* Notes on code below:
         Based on observation, it would seem that using $.ajax won't function
         properly with angular for some reason, using the $http object does
@@ -10,10 +10,12 @@ app.controller('ScheduleCtrl', function ($scope, $http) {
         .then(function (response) {
             /* On Success */
             var nflJson = JSON.parse(response.data.d);
+            $scope.week = nflJson.Week;
+            $scope.year = nflJson.Year;
             $scope.games = nflJson.Games;
             //console.log(nflJson.Games);
             /* Set variable to true to hide progress bar */
-            $scope.progbarHide = true;
+            $scope.hideContent = true;
         },
         function (response) {
             /* On Error */
