@@ -29,8 +29,8 @@
                         <nav>
                             <ul class="nav masthead-nav">
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/Users/SignIn.aspx">Sign In</a></li>
-                                <li><a href="/Games.aspx">Games</a></li>
+                                <!--<li><a href="/Users/SignIn.aspx">Sign In</a></li>
+                                <li><a href="/Games.aspx">Games</a></li>-->
                                 <li><a href="/About.aspx">About</a></li>
                             </ul>
                         </nav>
