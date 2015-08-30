@@ -42,7 +42,7 @@ namespace PoolPicks.Models
         {
             get
             {
-                if (_Games != null)
+                if (_Games == null)
                 {
                     _Games = new List<Game>();
                 }
