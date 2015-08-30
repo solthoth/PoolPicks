@@ -21,18 +21,34 @@ namespace PoolPicks.Models
         public int AwayScore { get; set; }
     }
 
+    public delegate void ParseInfoHandler(object sender, EventArgs e, int value);
+    public delegate void ParseGameHandler(object sender, EventArgs e, Game game);
+
     public class NFLFeed
     {
         public const string NFLSS_XML = "http://www.nfl.com/liveupdate/scorestrip/ss.xml";
+        public event ParseInfoHandler ParseWeek;
+        public event ParseInfoHandler ParseYear;
+        public event ParseGameHandler ParseGame;
+        
+        private List<Game> _Games;
 
-        public NFLFeed()
-        {
-            Games = new List<Game>();
-        }
+        public NFLFeed() { }
         /* Fields/Properties */
         public int Week { get; set; }
         public int Year { get; set; }
-        public List<Game> Games { get; set; }
+
+        public List<Game> Games
+        {
+            get
+            {
+                if (_Games != null)
+                {
+                    _Games = new List<Game>();
+                }
+                return _Games;
+            }
+        }
 
         /* Private Methods */
         private void ParseXML(XmlDocument feed)
@@ -40,7 +56,9 @@ namespace PoolPicks.Models
             XmlNodeList xList = feed.DocumentElement.SelectNodes("gms");
             XmlNode xNode = xList[0];//List only returns current week game
             this.Week = Convert.ToInt32(xNode.Attributes["w"].Value);
+            OnParseWeek(EventArgs.Empty, this.Week);
             this.Year = Convert.ToInt32(xNode.Attributes["y"].Value);
+            OnParseYear(EventArgs.Empty, this.Year);
             XmlNodeList xGames = xNode.ChildNodes;
             foreach (XmlNode xGame in xGames)
             {
@@ -57,8 +75,31 @@ namespace PoolPicks.Models
                 CurrentGame.AwayTeam.Abbr = xGame.Attributes["v"].Value;
                 CurrentGame.AwayScore = Convert.ToInt32(xGame.Attributes["vs"].Value);
                 Games.Add(CurrentGame);
+                OnParseGame(EventArgs.Empty, CurrentGame);
             }
 
+        }
+        /* Protected Methods */
+        protected virtual void OnParseGame(EventArgs e, Game game)
+        {
+            if (ParseGame != null)
+            {
+                ParseGame(this, e, game);
+            }
+        }
+        protected virtual void OnParseWeek(EventArgs e, int Week)
+        {
+            if (ParseWeek != null)
+            {
+                ParseWeek(this, e, Week);
+            }
+        }
+        protected virtual void OnParseYear(EventArgs e, int Year)
+        {
+            if (ParseYear != null)
+            {
+                ParseYear(this, e, Year);
+            }
         }
 
         /* Public Methods*/
