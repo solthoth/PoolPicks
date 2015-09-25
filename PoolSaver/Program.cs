@@ -1,15 +1,20 @@
 ﻿using PoolPicks.Models;
+using System.Data.SqlClient;
 
 namespace PoolSaver
 {
     using System;
     class Program
     {
+        private const string ArvixeConnection = "";
         private int GameWeek { get; set; }
         private int GameYear { get; set; }
-
+        private SqlConnection Connection { get; set; }
+        
         public void run()
         {
+            //Setup database connection
+            Connection = new SqlConnection(ArvixeConnection);
             //Parse RSS Feed
             NFLFeed feed = new NFLFeed();
             feed.ParseGame += Feed_ParseGame;
@@ -21,6 +26,9 @@ namespace PoolSaver
 
         private void SaveGame(Game game)
         {
+            int HomeTeamId;
+            int AwayTeamId;
+
             Console.WriteLine("Game saved!");
         }
 
